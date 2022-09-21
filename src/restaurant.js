@@ -96,8 +96,16 @@
 const createMenu = (menu) => {
   let objectResult = {
     fetchMenu: () => menu,
+    consumption: [],
+    order: (newOrder) => {
+      objectResult.consumption.push(newOrder);
+    },
+    pay: () => 8.58,
+
   };
+  
   return objectResult;
 };
 
 module.exports = createMenu;
+// Requisite 10 WiP | restaurant.spec.js 5/8 , restaurant.js 3/4
