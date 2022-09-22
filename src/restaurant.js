@@ -92,6 +92,25 @@
 // - fará a soma do preço desses itens;
 // - retornará o valor somado acrescido de 10%.
 // DICA: para isso, você precisará percorrer tanto o objeto da chave `food` quanto o objeto da chave `drink`.
+// const checkOrder = () => {
+//   for (let [x, y] of this.consumption) {
+//     if (Object.prototype.hasOwnProperty.call(this.menu.food, x)) {
+
+//     }
+//   }
+// };
+
+// const drinksValueSum = () => {
+//   let sum = 0;
+//   let drinkNames = Object.keys(this.menu.drinks);
+//   let drinkValues = Object.values(this.menu.drinks);
+//   for (let index1 = 0; index1 < this.consumption.length; index1 += 1) {
+//     for (let index2 = 0; index2 < drinkNames.length; index2 += 1) {
+//       if (this.consumption[index1] === drinkNames[index2]) sum += drinkValues[index2];
+//     }
+//   }
+//   return sum;
+// };
 
 const createMenu = (myMenu) => {
   let objectResult = {
@@ -102,21 +121,14 @@ const createMenu = (myMenu) => {
       objectResult.consumption.push(newOrder);
     },
     pay: () => {
-      let foodNames = Object.keys(objectResult.menu.food);
-      let foodValues = Object.values(objectResult.menu.food);
-      let drinkNames = Object.keys(objectResult.menu.drinks);
-      let drinkValues = Object.values(objectResult.menu.drinks);
-      let sum = 0;
-      for (let index1 = 0; index1 < objectResult.consumption.length; index1 += 1) {
-        for (let index2 = 0; index2 < foodNames.length; index2 += 1) {
-          if (objectResult.consumption[index1] === foodNames[index2]) sum += foodValues[index2];
+      const concatObj = Object.assign(objectResult.menu.food, objectResult.menu.drinks);
+      let value = 0;
+      objectResult.consumption.forEach((order) => {
+        for (let [x, y] of Object.entries(concatObj)) {
+          if (order === x) value += y;
         }
-        for (let index2 = 0; index2 < drinkNames.length; index2 += 1) {
-          if (objectResult.consumption[index1] === drinkNames[index2]) sum += drinkValues[index2];
-        }
-      }
-      sum *= 1.1;
-      return sum;
+      });
+      return value * 1.1;
     },
 
   };
@@ -124,12 +136,35 @@ const createMenu = (myMenu) => {
   return objectResult;
 };
 
-// 
-// if (objectResult.consumption[i] === drinkNames[i]) sum += drinkValues[i];
-// const restaurant = createMenu({ food: { coxinha: 3.90 }, drinks: { agua: 3.90 } });
-// console.log(Object.keys(restaurant.menu.food));
-// console.log(Object.values(restaurant.menu.food));
-// console.log();
-// // console.log(restaurant.pay());
+const restaurant = createMenu({ food: { coxinha: 3.90, pastel: 2.50 }, drinks: { agua: 3.90, suco: 1.50 } });
+console.log(restaurant.fetchMenu());
+
+// function getValueFood(order) {
+//   for (let x of this.menu.food)
+//   if (order === Object.keys(this.menu.food))
+// }
+
+// const restaurant = createMenu({ food: { coxinha: 3.90, pastel: 2.50 }, drinks: { agua: 3.90, suco: 1.50 } });
+// restaurant.order('coxinha');
+// restaurant.order('coxinha');
+// restaurant.order('agua');
+// const concatMenu = Object.entries(restaurant.menu.food).concat(Object.entries(restaurant.menu.drinks));
+// const concatObj = Object.assign(restaurant.menu.food, restaurant.menu.drinks);
+
+// // console.log(concatObj);
+// const testOrder = ['coxinha', 'coxinha', 'suco'];
+// // const getValueArry = () => {
+// // let resultArry = [];
+// let value = 0;
+// restaurant.consumption.forEach((order) => {
+//   for (let [x, y] of Object.entries(concatObj)) {
+//     if (order === x) value += y;
+//   }
+// });
+// console.log(value);
+// // for (let [x, y] of Object.entries(concatObj)) {
+// //   console.log(y);
+// // }
+
 module.exports = createMenu;
 // Requisite 10 WiP | restaurant.spec.js 8/8 , restaurant.js 4/4
