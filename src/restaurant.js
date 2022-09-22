@@ -117,7 +117,4 @@ const createMenu = (myMenu) => {
   return objectResult;
 };
 
-const restaurant = createMenu({ food: { coxinha: 3.90, pastel: 2.50 }, drinks: { agua: 3.90, suco: 1.50 } });
-console.log(restaurant.fetchMenu());
-
 module.exports = createMenu;
