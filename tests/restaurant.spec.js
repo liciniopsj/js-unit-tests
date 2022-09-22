@@ -131,7 +131,7 @@ describe('10 - Implemente a função `createMenu`, bem como seus casos de teste'
     actual8.order('coxinha');
     // actual8.pay() // Retorno: somaDosPreçosDosPedidos
     // ```
-    expect(actual8.pay()).toBeCloseTo(8.58);
+    expect(actual8.pay()).toBeCloseTo(12.87);
     // Agora faça o PASSO 4 no arquivo `src/restaurant.js`.
   });
 });

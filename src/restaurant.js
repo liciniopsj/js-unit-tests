@@ -93,19 +93,43 @@
 // - retornará o valor somado acrescido de 10%.
 // DICA: para isso, você precisará percorrer tanto o objeto da chave `food` quanto o objeto da chave `drink`.
 
-const createMenu = (menu) => {
+const createMenu = (myMenu) => {
   let objectResult = {
-    fetchMenu: () => menu,
+    menu: myMenu,
+    fetchMenu: () => objectResult.menu,
     consumption: [],
     order: (newOrder) => {
       objectResult.consumption.push(newOrder);
     },
-    pay: () => 8.58,
+    pay: () => {
+      let foodNames = Object.keys(objectResult.menu.food);
+      let foodValues = Object.values(objectResult.menu.food);
+      let drinkNames = Object.keys(objectResult.menu.drinks);
+      let drinkValues = Object.values(objectResult.menu.drinks);
+      let sum = 0;
+      for (let index1 = 0; index1 < objectResult.consumption.length; index1 += 1) {
+        for (let index2 = 0; index2 < foodNames.length; index2 += 1) {
+          if (objectResult.consumption[index1] === foodNames[index2]) sum += foodValues[index2];
+        }
+        for (let index2 = 0; index2 < drinkNames.length; index2 += 1) {
+          if (objectResult.consumption[index1] === drinkNames[index2]) sum += drinkValues[index2];
+        }
+      }
+      sum *= 1.1;
+      return sum;
+    },
 
   };
   
   return objectResult;
 };
 
+// 
+// if (objectResult.consumption[i] === drinkNames[i]) sum += drinkValues[i];
+// const restaurant = createMenu({ food: { coxinha: 3.90 }, drinks: { agua: 3.90 } });
+// console.log(Object.keys(restaurant.menu.food));
+// console.log(Object.values(restaurant.menu.food));
+// console.log();
+// // console.log(restaurant.pay());
 module.exports = createMenu;
-// Requisite 10 WiP | restaurant.spec.js 5/8 , restaurant.js 3/4
+// Requisite 10 WiP | restaurant.spec.js 8/8 , restaurant.js 4/4
